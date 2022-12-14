@@ -1,0 +1,15 @@
+table,
+table *,
+.productName,
+.price,
+.stockBalance {
+	border: 1px solid black;
+	width: 99vw;
+	text-align: center;
+}
+
+img {
+	width: 100px;
+	height: 100px;
+	border: none;
+}
