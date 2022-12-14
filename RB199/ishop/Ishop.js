@@ -1,10 +1,14 @@
 let Ishop = React.createClass({
 	displayName: 'Ishop',
 
+	// propTypes: {
+	// 	name: React.PropTypes.string.isRequired
+	// },
+
 	render: function () {
 
 		let products = this.props.product.map(value =>
-			React.DOM.tr({ key: value.code },
+			React.DOM.tr({ key: value.id },
 				React.DOM.td({ className: 'productName' }, value.productName),
 				React.DOM.td({ className: 'price' }, value.price),
 				React.DOM.td({ className: 'stockBalance' }, value.rest),
@@ -13,13 +17,15 @@ let Ishop = React.createClass({
 		)
 
 		return React.DOM.table({ className: 'Ishop' },
-			React.DOM.tr({},
-				React.DOM.th({ className: 'storeTable', colSpan: 4 }, this.props.name)),
-			React.DOM.tr({},
-				React.DOM.th({ className: 'tableHeader' }, 'Product name'),
-				React.DOM.th({ className: 'tableHeader' }, 'Price'),
-				React.DOM.th({ className: 'tableHeader' }, 'Stock balance'),
-				React.DOM.th({ className: 'tableHeader' }, 'Photo')),
+			React.DOM.thead({},
+				React.DOM.tr({},
+					React.DOM.th({ className: 'storeTable', colSpan: 4 }, this.props.name))),
+			React.DOM.thead({},
+				React.DOM.tr({},
+					React.DOM.th({ className: 'tableHeader' }, 'Product name'),
+					React.DOM.th({ className: 'tableHeader' }, 'Price'),
+					React.DOM.th({ className: 'tableHeader' }, 'Stock balance'),
+					React.DOM.th({ className: 'tableHeader' }, 'Photo'))),
 			React.DOM.tbody({}, products))
 	}
 });
