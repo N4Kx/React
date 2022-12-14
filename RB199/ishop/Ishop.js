@@ -1,9 +1,15 @@
 let Ishop = React.createClass({
 	displayName: 'Ishop',
 
-	// propTypes: {
-	// 	name: React.PropTypes.string.isRequired
-	// },
+	propTypes: {
+		product: React.PropTypes.arrayOf(React.PropTypes.shape({
+			productName: React.PropTypes.string,
+			price: React.PropTypes.number,
+			photoUrl: React.PropTypes.string,
+			rest: React.PropTypes.number,
+		})),
+		name: React.PropTypes.string,
+	},
 
 	render: function () {
 
