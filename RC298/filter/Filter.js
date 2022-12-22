@@ -30,7 +30,6 @@ let Filter = React.createClass({
 		} else {
 			this.setState({ word: this.props.defword.filter(v => v.includes(eo.target.value)), texttofilter: eo.target.value })
 		}
-		Z
 	},
 
 	resetToDefault: function (eo) {
