@@ -30,17 +30,14 @@ let Filter = React.createClass({
 		} else {
 			this.setState({ word: this.props.defword.filter(v => v.includes(eo.target.value)), texttofilter: eo.target.value })
 		}
+		Z
 	},
 
 	resetToDefault: function (eo) {
 		this.setState({ isSorted: this.props.defisSorted, word: this.props.defword, texttofilter: this.props.deftext });
-		console.log(`СБРОС!!!!`)
-
 	},
 
 	render: function () {
-		// console.log(this.state);
-
 		let words = this.state.word.map(value =>
 			React.DOM.option({ key: value }, value));
 
@@ -54,7 +51,7 @@ let Filter = React.createClass({
 			React.DOM.input({
 				className: 'TextToFilter',
 				type: 'text',
-				defaultValue: this.props.deftext,
+				value: this.state.texttofilter,
 				onChange: this.textToFilterChanged
 			},),
 			React.DOM.input({
