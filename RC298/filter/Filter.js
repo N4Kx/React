@@ -3,6 +3,8 @@ let Filter = React.createClass({
 
 	propTypes: {
 		defword: React.PropTypes.array.isRequired,
+		defisSorted: React.PropTypes.bool.isRequired,
+		deftext: React.PropTypes.string.isRequired,
 	},
 
 	getInitialState: function () {
@@ -37,7 +39,8 @@ let Filter = React.createClass({
 	},
 
 	render: function () {
-		console.log(this.state);
+		// console.log(this.state);
+
 		let words = this.state.word.map(value =>
 			React.DOM.option({ key: value }, value));
 
