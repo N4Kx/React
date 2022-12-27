@@ -1,0 +1,10 @@
+table {
+	border: 1px solid black;
+	width: 98vw;
+	text-align: center;
+}
+
+table * {
+	border: 1px solid black;
+	text-align: center;
+}
