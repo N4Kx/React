@@ -1,0 +1,36 @@
+table {
+	border: 1px solid black;
+	width: 98vw;
+	text-align: center;
+}
+
+table * {
+	border: 1px solid black;
+	text-align: center;
+}tbody * {
+	border: 1px solid black;
+	/* width: 19vw; */
+	text-align: center;
+}
+
+img {
+	width: 100px;
+	height: 100px;
+	border: none;
+}
+
+
+.productName,
+.price,
+.stockBalance {
+	width: 30vw;
+}
+
+.deleteBtn {
+	width: 5vw;
+}
+
+.selected {
+	background-color: orange;
+}
+/*# sourceMappingURL=bundle.css.map*/
