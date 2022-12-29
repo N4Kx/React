@@ -2,7 +2,7 @@ let Ishop = React.createClass({
 
 	displayName: 'Ishop',
 
-	propTyped: {
+	propTypes: {
 		product: React.PropTypes.array,
 		name: React.PropTypes.string,
 	},

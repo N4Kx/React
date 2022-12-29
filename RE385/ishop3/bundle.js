@@ -9602,39 +9602,35 @@ module.exports = getHostComponentFromComposite;
 
 /***/ }),
 /* 83 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Ishop__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__products_json__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__products_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__products_json__);
 
 
+var _react = __webpack_require__(31);
 
+var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = __webpack_require__(102);
 
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _Ishop = __webpack_require__(188);
 
-const container = document.querySelector('#container');
-const storeName = 'iFruitStore';
+var _Ishop2 = _interopRequireDefault(_Ishop);
 
+var _products = __webpack_require__(192);
 
-// const productsArr = [
-// 	{ productName: 'Carrot', price: 10, photoUrl: 'img/carrot.jpg', rest: 5, id: 1, },
-// 	{ productName: 'Apple', price: 1, photoUrl: 'img/apple.jpg', rest: 99, id: 2, },
-// 	{ productName: 'Pear', price: 3, photoUrl: 'img/pear.jpg', rest: 22, id: 3, },
-// 	{ productName: 'Orange', price: 5, photoUrl: 'img/orange.jpg', rest: 15, id: 4, },
-// 	{ productName: 'Grape', price: 79, photoUrl: 'img/grape.jpg', rest: 52, id: 5, },
-// ];
+var _products2 = _interopRequireDefault(_products);
 
-const reactElem = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Ishop__["a" /* default */], { product: __WEBPACK_IMPORTED_MODULE_3__products_json___default.a, name: storeName });
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(reactElem, container);
+var container = document.querySelector('#container');
+var storeName = 'iFruitStore';
+
+var reactElem = _react2.default.createElement(_Ishop2.default, { product: _products2.default, name: storeName });
+
+_reactDom2.default.render(reactElem, container);
 
 /***/ }),
 /* 84 */
@@ -22572,85 +22568,100 @@ module.exports = ReactDOMInvalidARIAHook;
 
 /***/ }),
 /* 188 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Ishop_css__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Ishop_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Ishop_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Product__ = __webpack_require__(190);
 
 
-
-
-
-
-let Ishop = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
-
-	displayName: 'Ishop',
-
-	propTyped: {
-		product: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.array,
-		name: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
-	},
-
-	getInitialState: function () {
-		return {
-			product: this.props.product,
-			selectedItemId: '',
-		}
-	},
-	selectedItem: function (code) {
-		this.setState({ selectedItemId: code });
-	}
-	,
-
-	deleteItem: function (code) {
-		if (confirm('Are you sure that you wan\'t to delete this product ?')) {
-			const newProduct = this.state.product.filter(value => value.id != code);
-			this.setState({ product: newProduct });
-		}
-	},
-
-	render: function () {
-		let products = this.state.product.map(value =>
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Product__["a" /* default */], {
-				key: value.id,
-				id: value.id,
-				productName: value.productName,
-				price: value.price,
-				rest: value.rest,
-				isSelected: value.id == this.state.selectedItemId,
-				photoUrl: value.photoUrl,
-				cbSelectedItem: this.selectedItem,
-				cbDeleteItem: this.deleteItem,
-			})
-		)
-
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.table({ className: 'Ishop' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.thead({},
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.tr({},
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.th({
-						className: 'storeTable',
-						colSpan: 5
-					},
-						this.props.name))),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.thead({},
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.tr({},
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.th({ className: 'tableHeader' }, 'Product name'),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.th({ className: 'tableHeader' }, 'Price'),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.th({ className: 'tableHeader' }, 'Stock balance'),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.th({ className: 'tableHeader' }, 'Photo'),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.th({ className: 'tableHeader' }, 'Control'),
-				)
-			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.tbody({}, products),
-		)
-	},
+Object.defineProperty(exports, "__esModule", {
+	value: true
 });
 
-/* harmony default export */ __webpack_exports__["a"] = (Ishop);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(31);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(189);
+
+var _Product = __webpack_require__(190);
+
+var _Product2 = _interopRequireDefault(_Product);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Ishop = function (_React$Component) {
+	_inherits(Ishop, _React$Component);
+
+	function Ishop() {
+		var _ref;
+
+		var _temp, _this, _ret;
+
+		_classCallCheck(this, Ishop);
+
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
+
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Ishop.__proto__ || Object.getPrototypeOf(Ishop)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+			product: _this.props.product,
+			selectedItemId: ''
+		}, _this.selectedItem = function (code) {
+			_this.setState({ selectedItemId: code });
+		}, _this.deleteItem = function (code) {
+			if (confirm('Are you sure that you wan\'t to delete this product ?')) {
+				var newProduct = _this.state.product.filter(function (value) {
+					return value.id != code;
+				});
+				_this.setState({ product: newProduct });
+			}
+		}, _temp), _possibleConstructorReturn(_this, _ret);
+	}
+
+	_createClass(Ishop, [{
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			var products = this.state.product.map(function (value) {
+				return _react2.default.createElement(_Product2.default, {
+					key: value.id,
+					id: value.id,
+					productName: value.productName,
+					price: value.price,
+					rest: value.rest,
+					isSelected: value.id == _this2.state.selectedItemId,
+					photoUrl: value.photoUrl,
+					cbSelectedItem: _this2.selectedItem,
+					cbDeleteItem: _this2.deleteItem
+				});
+			});
+
+			return _react2.default.DOM.table({ className: 'Ishop' }, _react2.default.DOM.thead({}, _react2.default.DOM.tr({}, _react2.default.DOM.th({
+				className: 'storeTable',
+				colSpan: 5
+			}, this.props.name))), _react2.default.DOM.thead({}, _react2.default.DOM.tr({}, _react2.default.DOM.th({ className: 'tableHeader' }, 'Product name'), _react2.default.DOM.th({ className: 'tableHeader' }, 'Price'), _react2.default.DOM.th({ className: 'tableHeader' }, 'Stock balance'), _react2.default.DOM.th({ className: 'tableHeader' }, 'Photo'), _react2.default.DOM.th({ className: 'tableHeader' }, 'Control'))), _react2.default.DOM.tbody({}, products));
+		}
+	}]);
+
+	return Ishop;
+}(_react2.default.Component);
+
+Ishop.propTypes = {
+	product: _react2.default.PropTypes.array,
+	name: _react2.default.PropTypes.string
+};
+;
+
+exports.default = Ishop;
 
 /***/ }),
 /* 189 */
@@ -22660,63 +22671,84 @@ let Ishop = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
 
 /***/ }),
 /* 190 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Product_css__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Product_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Product_css__);
 
 
-
-
-let Product = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createClass({
-	displayName: 'Product',
-
-	propTypes: {
-		id: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.number.isRequired,
-		productName: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
-		price: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.number,
-		rest: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.number,
-		photoUrl: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.string,
-		isSelected: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.bool,
-		cbSelectedItem: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.func,
-		cbDeleteItem: __WEBPACK_IMPORTED_MODULE_0_react___default.a.PropTypes.func,
-	},
-
-	select: function (eo) {
-		this.props.cbSelectedItem(this.props.id);
-	},
-
-	delete: function (eo) {
-		eo.stopPropagation();
-		this.props.cbDeleteItem(this.props.id);
-	},
-
-	render: function () {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.tr({ onClick: this.select, className: (this.props.isSelected) ? 'selected' : null },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.td({ className: 'productName' }, this.props.productName),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.td({ className: 'price' }, this.props.price),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.td({ className: 'stockBalance' }, this.props.rest),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.td({ className: 'photoCell' },
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.img({
-					className: 'img',
-					src: this.props.photoUrl
-				})),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.td({},
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.DOM.input({
-					className: 'deleteBtn',
-					type: 'button',
-					value: 'Delete',
-					onClick: this.delete
-				},),
-			)
-		)
-	}
+Object.defineProperty(exports, "__esModule", {
+	value: true
 });
 
-/* harmony default export */ __webpack_exports__["a"] = (Product);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(31);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(191);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Product = function (_React$Component) {
+	_inherits(Product, _React$Component);
+
+	function Product() {
+		var _ref;
+
+		var _temp, _this, _ret;
+
+		_classCallCheck(this, Product);
+
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
+
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Product.__proto__ || Object.getPrototypeOf(Product)).call.apply(_ref, [this].concat(args))), _this), _this.select = function (eo) {
+			_this.props.cbSelectedItem(_this.props.id);
+		}, _this.delete = function (eo) {
+			eo.stopPropagation();
+			_this.props.cbDeleteItem(_this.props.id);
+		}, _temp), _possibleConstructorReturn(_this, _ret);
+	}
+
+	_createClass(Product, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.DOM.tr({ onClick: this.select, className: this.props.isSelected ? 'selected' : null }, _react2.default.DOM.td({ className: 'productName' }, this.props.productName), _react2.default.DOM.td({ className: 'price' }, this.props.price), _react2.default.DOM.td({ className: 'stockBalance' }, this.props.rest), _react2.default.DOM.td({ className: 'photoCell' }, _react2.default.DOM.img({
+				className: 'img',
+				src: this.props.photoUrl
+			})), _react2.default.DOM.td({}, _react2.default.DOM.input({
+				className: 'deleteBtn',
+				type: 'button',
+				value: 'Delete',
+				onClick: this.delete
+			})));
+		}
+	}]);
+
+	return Product;
+}(_react2.default.Component);
+
+Product.propTypes = {
+	id: _react2.default.PropTypes.number.isRequired,
+	productName: _react2.default.PropTypes.string,
+	price: _react2.default.PropTypes.number,
+	rest: _react2.default.PropTypes.number,
+	photoUrl: _react2.default.PropTypes.string,
+	isSelected: _react2.default.PropTypes.bool,
+	cbSelectedItem: _react2.default.PropTypes.func,
+	cbDeleteItem: _react2.default.PropTypes.func
+};
+;
+
+exports.default = Product;
 
 /***/ }),
 /* 191 */

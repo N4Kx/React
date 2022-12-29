@@ -2,10 +2,9 @@ import React from 'react';
 
 import './Product.css';
 
-let Product = React.createClass({
-	displayName: 'Product',
+class Product extends React.Component {
 
-	propTypes: {
+	static propTypes = {
 		id: React.PropTypes.number.isRequired,
 		productName: React.PropTypes.string,
 		price: React.PropTypes.number,
@@ -14,18 +13,18 @@ let Product = React.createClass({
 		isSelected: React.PropTypes.bool,
 		cbSelectedItem: React.PropTypes.func,
 		cbDeleteItem: React.PropTypes.func,
-	},
+	};
 
-	select: function (eo) {
+	select = (eo) => {
 		this.props.cbSelectedItem(this.props.id);
-	},
+	};
 
-	delete: function (eo) {
+	delete = (eo) => {
 		eo.stopPropagation();
 		this.props.cbDeleteItem(this.props.id);
-	},
+	};
 
-	render: function () {
+	render() {
 		return React.DOM.tr({ onClick: this.select, className: (this.props.isSelected) ? 'selected' : null },
 			React.DOM.td({ className: 'productName' }, this.props.productName),
 			React.DOM.td({ className: 'price' }, this.props.price),
@@ -45,6 +44,6 @@ let Product = React.createClass({
 			)
 		)
 	}
-});
+};
 
 export default Product;

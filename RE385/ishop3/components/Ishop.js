@@ -4,34 +4,31 @@ import './Ishop.css';
 
 import Product from './Product';
 
-let Ishop = React.createClass({
+class Ishop extends React.Component {
 
-	displayName: 'Ishop',
-
-	propTyped: {
+	static propTypes = {
 		product: React.PropTypes.array,
 		name: React.PropTypes.string,
-	},
+	};
 
-	getInitialState: function () {
-		return {
-			product: this.props.product,
-			selectedItemId: '',
-		}
-	},
-	selectedItem: function (code) {
+	state = {
+		product: this.props.product,
+		selectedItemId: '',
+	};
+
+	selectedItem = (code) => {
 		this.setState({ selectedItemId: code });
-	}
-	,
+	};
 
-	deleteItem: function (code) {
+
+	deleteItem = (code) => {
 		if (confirm('Are you sure that you wan\'t to delete this product ?')) {
 			const newProduct = this.state.product.filter(value => value.id != code);
 			this.setState({ product: newProduct });
 		}
-	},
+	};
 
-	render: function () {
+	render() {
 		let products = this.state.product.map(value =>
 			React.createElement(Product, {
 				key: value.id,
@@ -65,7 +62,7 @@ let Ishop = React.createClass({
 			),
 			React.DOM.tbody({}, products),
 		)
-	},
-});
+	}
+};
 
 export default Ishop;
