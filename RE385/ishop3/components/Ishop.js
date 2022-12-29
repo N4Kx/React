@@ -1,3 +1,9 @@
+import React from 'react';
+
+import './Ishop.css';
+
+import Product from './Product';
+
 let Ishop = React.createClass({
 
 	displayName: 'Ishop',
@@ -61,3 +67,5 @@ let Ishop = React.createClass({
 		)
 	},
 });
+
+export default Ishop;

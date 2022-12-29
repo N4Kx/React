@@ -1,8 +1,12 @@
+import React from "react";
+
+import './Product.css';
+
 let Product = React.createClass({
 	displayName: 'Product',
 
 	propTypes: {
-		id: React.PropTypes.number,
+		id: React.PropTypes.number.isRequired,
 		productName: React.PropTypes.string,
 		price: React.PropTypes.number,
 		rest: React.PropTypes.number,
@@ -42,3 +46,5 @@ let Product = React.createClass({
 		)
 	}
 });
+
+export default Product;
