@@ -30,38 +30,33 @@ class Ishop extends React.Component {
 
 	render() {
 		let products = this.state.product.map(value =>
-			React.createElement(Product, {
-				key: value.id,
-				id: value.id,
-				productName: value.productName,
-				price: value.price,
-				rest: value.rest,
-				isSelected: value.id == this.state.selectedItemId,
-				photoUrl: value.photoUrl,
-				cbSelectedItem: this.selectedItem,
-				cbDeleteItem: this.deleteItem,
-			})
-		)
+			<Product key={value.id} id={value.id} productName={value.productName} price={value.price}
+				rest={value.rest} isSelected={value.id == this.state.selectedItemId}
+				photoUrl={value.photoUrl}
+				cbSelectedItem={this.selectedItem} cbDeleteItem={this.deleteItem} />
+		);
 
-		return React.DOM.table({ className: 'Ishop' },
-			React.DOM.thead({},
-				React.DOM.tr({},
-					React.DOM.th({
-						className: 'storeTable',
-						colSpan: 5
-					},
-						this.props.name))),
-			React.DOM.thead({},
-				React.DOM.tr({},
-					React.DOM.th({ className: 'tableHeader' }, 'Product name'),
-					React.DOM.th({ className: 'tableHeader' }, 'Price'),
-					React.DOM.th({ className: 'tableHeader' }, 'Stock balance'),
-					React.DOM.th({ className: 'tableHeader' }, 'Photo'),
-					React.DOM.th({ className: 'tableHeader' }, 'Control'),
-				)
-			),
-			React.DOM.tbody({}, products),
-		)
+		return (
+			<table className='Ishop'>
+				<thead>
+					<tr>
+						<th className='storeTable' colSpan={5}>{this.props.name}</th>
+					</tr>
+				</thead>
+				<thead>
+					<tr>
+						<th className='tableHeader'>Product name</th>
+						<th className='tableHeader'>Price</th>
+						<th className='tableHeader'>Stock balance</th>
+						<th className='tableHeader'>Photo</th>
+						<th className='tableHeader'>Control</th>
+					</tr>
+				</thead>
+				<tbody>
+					{products}
+				</tbody>
+			</table>
+		);
 	}
 };
 

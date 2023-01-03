@@ -5,7 +5,7 @@ import './Product.css';
 class Product extends React.Component {
 
 	static propTypes = {
-		id: React.PropTypes.number.isRequired,
+		id: React.PropTypes.number,
 		productName: React.PropTypes.string,
 		price: React.PropTypes.number,
 		rest: React.PropTypes.number,
@@ -25,24 +25,19 @@ class Product extends React.Component {
 	};
 
 	render() {
-		return React.DOM.tr({ onClick: this.select, className: (this.props.isSelected) ? 'selected' : null },
-			React.DOM.td({ className: 'productName' }, this.props.productName),
-			React.DOM.td({ className: 'price' }, this.props.price),
-			React.DOM.td({ className: 'stockBalance' }, this.props.rest),
-			React.DOM.td({ className: 'photoCell' },
-				React.DOM.img({
-					className: 'img',
-					src: this.props.photoUrl
-				})),
-			React.DOM.td({},
-				React.DOM.input({
-					className: 'deleteBtn',
-					type: 'button',
-					value: 'Delete',
-					onClick: this.delete
-				},),
-			)
-		)
+		return (
+			<tr className={(this.props.isSelected) ? 'selected' : null} onClick={this.select} >
+				<td className='productName'>{this.props.productName}</td>
+				<td className='price'>{this.props.price}</td>
+				<td className='stockBalance'>{this.props.rest}</td>
+				<td className='photoCell'>
+					<img className='img' src={this.props.photoUrl}></img>
+				</td>
+				<td>
+					<input className='deleteBtn' type='button' value='Delete' onClick={this.delete}></input>
+				</td>
+			</tr>
+		);
 	}
 };
 

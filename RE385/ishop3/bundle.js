@@ -22632,23 +22632,67 @@ var Ishop = function (_React$Component) {
 			var _this2 = this;
 
 			var products = this.state.product.map(function (value) {
-				return _react2.default.createElement(_Product2.default, {
-					key: value.id,
-					id: value.id,
-					productName: value.productName,
-					price: value.price,
-					rest: value.rest,
-					isSelected: value.id == _this2.state.selectedItemId,
+				return _react2.default.createElement(_Product2.default, { key: value.id, id: value.id, productName: value.productName, price: value.price,
+					rest: value.rest, isSelected: value.id == _this2.state.selectedItemId,
 					photoUrl: value.photoUrl,
-					cbSelectedItem: _this2.selectedItem,
-					cbDeleteItem: _this2.deleteItem
-				});
+					cbSelectedItem: _this2.selectedItem, cbDeleteItem: _this2.deleteItem });
 			});
 
-			return _react2.default.DOM.table({ className: 'Ishop' }, _react2.default.DOM.thead({}, _react2.default.DOM.tr({}, _react2.default.DOM.th({
-				className: 'storeTable',
-				colSpan: 5
-			}, this.props.name))), _react2.default.DOM.thead({}, _react2.default.DOM.tr({}, _react2.default.DOM.th({ className: 'tableHeader' }, 'Product name'), _react2.default.DOM.th({ className: 'tableHeader' }, 'Price'), _react2.default.DOM.th({ className: 'tableHeader' }, 'Stock balance'), _react2.default.DOM.th({ className: 'tableHeader' }, 'Photo'), _react2.default.DOM.th({ className: 'tableHeader' }, 'Control'))), _react2.default.DOM.tbody({}, products));
+			return _react2.default.createElement(
+				'table',
+				{ className: 'Ishop' },
+				_react2.default.createElement(
+					'thead',
+					null,
+					_react2.default.createElement(
+						'tr',
+						null,
+						_react2.default.createElement(
+							'th',
+							{ className: 'storeTable', colSpan: 5 },
+							this.props.name
+						)
+					)
+				),
+				_react2.default.createElement(
+					'thead',
+					null,
+					_react2.default.createElement(
+						'tr',
+						null,
+						_react2.default.createElement(
+							'th',
+							{ className: 'tableHeader' },
+							'Product name'
+						),
+						_react2.default.createElement(
+							'th',
+							{ className: 'tableHeader' },
+							'Price'
+						),
+						_react2.default.createElement(
+							'th',
+							{ className: 'tableHeader' },
+							'Stock balance'
+						),
+						_react2.default.createElement(
+							'th',
+							{ className: 'tableHeader' },
+							'Photo'
+						),
+						_react2.default.createElement(
+							'th',
+							{ className: 'tableHeader' },
+							'Control'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'tbody',
+					null,
+					products
+				)
+			);
 		}
 	}]);
 
@@ -22721,15 +22765,35 @@ var Product = function (_React$Component) {
 	_createClass(Product, [{
 		key: 'render',
 		value: function render() {
-			return _react2.default.DOM.tr({ onClick: this.select, className: this.props.isSelected ? 'selected' : null }, _react2.default.DOM.td({ className: 'productName' }, this.props.productName), _react2.default.DOM.td({ className: 'price' }, this.props.price), _react2.default.DOM.td({ className: 'stockBalance' }, this.props.rest), _react2.default.DOM.td({ className: 'photoCell' }, _react2.default.DOM.img({
-				className: 'img',
-				src: this.props.photoUrl
-			})), _react2.default.DOM.td({}, _react2.default.DOM.input({
-				className: 'deleteBtn',
-				type: 'button',
-				value: 'Delete',
-				onClick: this.delete
-			})));
+			return _react2.default.createElement(
+				'tr',
+				{ className: this.props.isSelected ? 'selected' : null, onClick: this.select },
+				_react2.default.createElement(
+					'td',
+					{ className: 'productName' },
+					this.props.productName
+				),
+				_react2.default.createElement(
+					'td',
+					{ className: 'price' },
+					this.props.price
+				),
+				_react2.default.createElement(
+					'td',
+					{ className: 'stockBalance' },
+					this.props.rest
+				),
+				_react2.default.createElement(
+					'td',
+					{ className: 'photoCell' },
+					_react2.default.createElement('img', { className: 'img', src: this.props.photoUrl })
+				),
+				_react2.default.createElement(
+					'td',
+					null,
+					_react2.default.createElement('input', { className: 'deleteBtn', type: 'button', value: 'Delete', onClick: this.delete })
+				)
+			);
 		}
 	}]);
 
@@ -22737,7 +22801,7 @@ var Product = function (_React$Component) {
 }(_react2.default.Component);
 
 Product.propTypes = {
-	id: _react2.default.PropTypes.number.isRequired,
+	id: _react2.default.PropTypes.number,
 	productName: _react2.default.PropTypes.string,
 	price: _react2.default.PropTypes.number,
 	rest: _react2.default.PropTypes.number,
