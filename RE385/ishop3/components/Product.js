@@ -5,14 +5,14 @@ import './Product.css';
 class Product extends React.Component {
 
 	static propTypes = {
-		id: React.PropTypes.number,
-		productName: React.PropTypes.string,
-		price: React.PropTypes.number,
-		rest: React.PropTypes.number,
-		photoUrl: React.PropTypes.string,
-		isSelected: React.PropTypes.bool,
-		cbSelectedItem: React.PropTypes.func,
-		cbDeleteItem: React.PropTypes.func,
+		id: PropTypes.number,
+		productName: PropTypes.string,
+		price: PropTypes.number,
+		rest: PropTypes.number,
+		photoUrl: PropTypes.string,
+		isSelected: PropTypes.bool,
+		cbSelectedItem: PropTypes.func,
+		cbDeleteItem: PropTypes.func,
 	};
 
 	select = (eo) => {

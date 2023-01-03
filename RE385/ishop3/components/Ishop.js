@@ -7,8 +7,8 @@ import Product from './Product';
 class Ishop extends React.Component {
 
 	static propTypes = {
-		product: React.PropTypes.array,
-		name: React.PropTypes.string,
+		product: PropTypes.array,
+		name: PropTypes.string,
 	};
 
 	state = {
