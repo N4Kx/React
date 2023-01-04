@@ -41,6 +41,19 @@ class Ishop extends React.Component {
 		console.log('ADD ITEM!!!');
 	}
 
+	saveItem = (code) => {
+		// console.log(this.state.product);
+		let newProduct = [];
+		for (let value of this.state.product) {
+			if (value.id == code.editedId) {
+				newProduct.push({ productName: code.editedName, price: Number(code.editedPrice), photoUrl: code.editedPhotoUrl, rest: Number(code.editedRest), id: Number(code.editedId), });
+			} else {
+				newProduct.push(value);
+			}
+		}
+		this.setState({ product: newProduct });
+	}
+
 	disableBtns = (code) => {
 		// console.log('disable btns')
 		this.setState({ disableBtns: code });
@@ -93,6 +106,7 @@ class Ishop extends React.Component {
 						editedItemRest={this.state.editedItemRest}
 						editedItemPhotoUrl={this.state.editedItemPhotoUrl}
 						cbDisableBtns={this.disableBtns}
+						cbSaveItem={this.saveItem}
 					// editItemName={this.state.selectedItemId && this.state.selectedItemName}
 					/>
 					:
