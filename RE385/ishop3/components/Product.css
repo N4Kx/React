@@ -17,8 +17,9 @@ img {
 	width: 30vw;
 }
 
-.deleteBtn {
+.btn {
 	width: 5vw;
+	margin: 3px;
 }
 
 .selected {

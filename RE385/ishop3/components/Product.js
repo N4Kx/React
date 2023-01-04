@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Product.css';
+import { TSThisType } from 'babel-types';
 
 class Product extends React.Component {
 
@@ -12,18 +13,29 @@ class Product extends React.Component {
 		rest: PropTypes.number,
 		photoUrl: PropTypes.string,
 		isSelected: PropTypes.bool,
+		isEdited: PropTypes.bool,
+		isDisabledBtns: PropTypes.bool,
 		cbSelectedItem: PropTypes.func,
 		cbDeleteItem: PropTypes.func,
+		cbEditItem: PropTypes.func,
 	};
 
 	select = (eo) => {
-		this.props.cbSelectedItem(this.props.id);
+		// this.props.cbSelectedItem(this.props.id);
+		(!this.props.isDisabledBtns) && (
+			this.props.cbSelectedItem({ selectedId: this.props.id, selectedName: this.props.productName, selectedPrice: this.props.price, selectedRest: this.props.rest, selectedUrl: this.props.photoUrl }))
 	};
 
 	delete = (eo) => {
 		eo.stopPropagation();
 		this.props.cbDeleteItem(this.props.id);
 	};
+
+	edit = (eo) => {
+		// console.log(`Edit pushed ${this.props.id}`);
+		// this.props.cbEditItem(this.props.id);
+		this.props.cbEditItem({ editedId: this.props.id, editedName: this.props.productName, editedPrice: this.props.price, editedRest: this.props.rest, editedPhotoUrl: this.props.photoUrl });
+	}
 
 	render() {
 		return (
@@ -35,7 +47,8 @@ class Product extends React.Component {
 					<img className='img' src={this.props.photoUrl}></img>
 				</td>
 				<td>
-					<input className='deleteBtn' type='button' value='Delete' onClick={this.delete}></input>
+					<input className={(this.props.isEdited) ? 'editBtn btn selectedEditBtn' : 'editBtn btn'} type='button' value='Edit' onClick={this.edit} disabled={this.props.isDisabledBtns}></input>
+					<input className='deleteBtn btn' type='button' value='Delete' onClick={this.delete} disabled={this.props.isDisabledBtns}></input>
 				</td>
 			</tr>
 		);

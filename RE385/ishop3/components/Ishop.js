@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import './Ishop.css';
 
 import Product from './Product';
+import ProductCard from './ProductCard';
+import EditItem from './EditItem';
 
 class Ishop extends React.Component {
 
@@ -15,10 +17,11 @@ class Ishop extends React.Component {
 	state = {
 		product: this.props.product,
 		selectedItemId: '',
+		disableBtns: false,
 	};
 
 	selectedItem = (code) => {
-		this.setState({ selectedItemId: code });
+		this.setState({ selectedItemId: code.selectedId, selectedItemName: code.selectedName, selectedItemPrice: code.selectedPrice });
 	};
 
 
@@ -29,34 +32,76 @@ class Ishop extends React.Component {
 		}
 	};
 
+	editItem = (code) => {
+		this.setState({ editedItemId: code.editedId, editedItemName: code.editedName, editedItemPrice: code.editedPrice, editedItemRest: code.editedRest, editedItemPhotoUrl: code.editedPhotoUrl });
+		// console.log(`Ishop + ${code}`);
+	}
+
+	addItem = (code) => {
+		console.log('ADD ITEM!!!');
+	}
+
+	disableBtns = (code) => {
+		// console.log('disable btns')
+		this.setState({ disableBtns: code });
+	}
+
 	render() {
 		let products = this.state.product.map(value =>
-			<Product key={value.id} id={value.id} productName={value.productName} price={value.price}
-				rest={value.rest} isSelected={value.id == this.state.selectedItemId}
+			<Product
+				key={value.id} id={value.id} productName={value.productName} price={value.price}
+				rest={value.rest} isSelected={value.id == this.state.selectedItemId} isEdited={value.id == this.state.editedItemId} isDisabledBtns={this.state.disableBtns}
 				photoUrl={value.photoUrl}
-				cbSelectedItem={this.selectedItem} cbDeleteItem={this.deleteItem} />
+				cbSelectedItem={this.selectedItem} cbDeleteItem={this.deleteItem}
+				cbEditItem={this.editItem}
+			/>
 		);
 
 		return (
-			<table className='Ishop'>
-				<thead>
-					<tr>
-						<th className='storeTable' colSpan={5}>{this.props.name}</th>
-					</tr>
-				</thead>
-				<thead>
-					<tr>
-						<th className='tableHeader'>Product name</th>
-						<th className='tableHeader'>Price</th>
-						<th className='tableHeader'>Stock balance</th>
-						<th className='tableHeader'>Photo</th>
-						<th className='tableHeader'>Control</th>
-					</tr>
-				</thead>
-				<tbody>
-					{products}
-				</tbody>
-			</table>
+			<div className='Ishop'>
+				<table>
+					<thead>
+						<tr>
+							<th className='storeTable' colSpan={5}>{this.props.name}</th>
+						</tr>
+					</thead>
+					<thead>
+						<tr>
+							<th className='tableHeader'>Product name</th>
+							<th className='tableHeader'>Price</th>
+							<th className='tableHeader'>Stock balance</th>
+							<th className='tableHeader'>Photo</th>
+							<th className='tableHeader'>Control</th>
+						</tr>
+					</thead>
+					<tbody>
+						{products}
+					</tbody>
+				</table>
+				{/* {
+					(this.state.editedId == this.state.selectedItemId) ?
+						null
+						:
+						<input className='newBtn btn' type='button' value='New product' onClick={this.addItem}></input>
+				} */}
+
+				{(this.state.editedItemId == this.state.selectedItemId) ?
+					<EditItem
+						editedItemId={this.state.editedItemId}
+						editedItemName={this.state.editedItemName}
+						editedItemPrice={this.state.editedItemPrice}
+						editedItemRest={this.state.editedItemRest}
+						editedItemPhotoUrl={this.state.editedItemPhotoUrl}
+						cbDisableBtns={this.disableBtns}
+					// editItemName={this.state.selectedItemId && this.state.selectedItemName}
+					/>
+					:
+					(this.state.selectedItemId) && <ProductCard
+						selectedItemId={this.state.selectedItemId}
+						selectedItemName={this.state.selectedItemName}
+						selectedItemPrice={this.state.selectedItemPrice}
+					/>}
+			</div>
 		);
 	}
 };
