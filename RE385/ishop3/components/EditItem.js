@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 
 import './EditItem.css';
 
+const fieldName = 'Name';
+const price = 'Price';
+const rest = 'Rest';
+const photoUrl = 'PhotoUrl';
+
 class EditItem extends React.Component {
 
 	static propTypes = {
@@ -21,11 +26,56 @@ class EditItem extends React.Component {
 		editedItemPrice: this.props.editedItemPrice,
 		editedItemRest: this.props.editedItemRest,
 		editedItemPhotoUrl: this.props.editedItemPhotoUrl,
+		isValidatedName: true,
+		isValidatedPrice: true,
+		isValidatedRest: true,
+		isValidatedPhotoUrl: true,
 	}
 
 	editField = (eo) => {
 		let newStateName = 'editedItem' + eo.target.dataset.n;
-		this.setState({ [newStateName]: eo.target.value }, this.props.cbDisableBtns(true))
+		this.setState({ [newStateName]: eo.target.value }, this.props.cbDisableBtns(true));
+		this.validPass(eo.target.dataset.n, eo.target.value);
+	}
+
+	validPass = (name, value) => {
+		// let newStateName = 'editedItem' + name;
+		let isValidated = 'isValidated' + name;
+
+		// console.log(isValidated);
+
+		if (name == fieldName) {
+			let regExp = /[^a-z0-9]/i;
+			if (!regExp.test(value)) {
+				this.setState({ [isValidated]: true });
+			} else {
+				this.setState({ [isValidated]: false });
+			}
+		}
+		else if (name == photoUrl) {
+			let regExp = /[^a-z0-9.\-\/]/i;
+			if (!regExp.test(value)) {
+				this.setState({ [isValidated]: true });
+			} else {
+				this.setState({ [isValidated]: false });
+			}
+		}
+		else if (name == price) {
+			value = Number(value);
+			if (!isNaN(value) && value > 0) {
+				this.setState({ [isValidated]: true });
+			} else {
+				this.setState({ [isValidated]: false });
+			}
+		}
+		else if (name == rest) {
+			value = Number(value);
+			if (!isNaN(value) && value >= 0) {
+				this.setState({ [isValidated]: true });
+			} else {
+				this.setState({ [isValidated]: false });
+			}
+		}
 	}
 
 	// editNameField = (eo) => {
@@ -49,12 +99,6 @@ class EditItem extends React.Component {
 		this.props.cbDisableBtns(false);
 	}
 
-	// могу ли я такой мелкой функцией заменить прямой вызов коллбэк функции из пропсов или это плохой стиль ? по идее
-	// усложняет код и может вызвать дополнительные ошибки, но визуально выглядит красивее и читабельнее ?
-	// disableBtns = (value) => {
-	// 	this.props.cbDisableBtns(value);
-	// }
-
 	cancel = (eo) => {
 		this.setState({
 			editedItemId: this.props.editedItemId,
@@ -70,11 +114,17 @@ class EditItem extends React.Component {
 		return (
 			<div className='EditIem'>
 				<span className='editLabel'>ID:</span> <span>{this.state.editedItemId}</span><br />
-				<span className='editLabel'>Name:</span>  <input type='text' value={this.state.editedItemName} onChange={this.editField} data-n='Name'></input><br />
-				<span className='editLabel'>Price:</span> <input type='text' value={this.state.editedItemPrice} onChange={this.editField} data-n='Price'></input><br />
-				<span className='editLabel'>Rest:</span> <input type='text' value={this.state.editedItemRest} onChange={this.editField} data-n='Rest'></input><br />
-				<span className='editLabel'>Photo URL:</span> <input type='text' value={this.state.editedItemPhotoUrl} onChange={this.editField} data-n='PhotoUrl'></input><br />
-				<input className='btn saveBtn' type='button' value='Save' onClick={this.save}></input>
+				<span className='editLabel'>Name:</span>  <input type='text' value={this.state.editedItemName} onChange={this.editField} data-n={fieldName}></input>{(!this.state.isValidatedName) && <span className='validateError'>Please, fill the field. The value must be a string of Latin letters and numbers</span>}
+				<br />
+				<span className='editLabel'>Price:</span> <input type='text' value={this.state.editedItemPrice} onChange={this.editField} data-n={price}></input>{(!this.state.isValidatedPrice) && <span className='validateError'>Please, fill the field. The value must be a number greater than 0</span>}
+				<br />
+				<span className='editLabel'>Rest:</span> <input type='text' value={this.state.editedItemRest} onChange={this.editField} data-n={rest}></input>{(!this.state.isValidatedRest) && <span className='validateError'>Please, fill the field. The value must be a number greater than or equal to 0</span>}
+				<br />
+				<span className='editLabel'>Photo URL:</span> <input type='text' value={this.state.editedItemPhotoUrl} onChange={this.editField} data-n={photoUrl}></input>{(!this.state.isValidatedPhotoUrl) && <span className='validateError'>Please, fill the field. The value must be a string of Latin letters, numbers and symbols ".", "-", "\".</span>}
+				<br />
+				<input className='btn saveBtn' type='button' value='Save' onClick={this.save}
+					disabled={(this.state.isValidatedName && this.state.isValidatedPrice && this.state.isValidatedRest) ? false : true}
+				></input>
 				<input className='btn cancelBtn' type='button' value='Cancel' onClick={this.cancel}></input>
 			</div>
 		)
