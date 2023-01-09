@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Product.css';
-import { TSThisType } from 'babel-types';
 
 class Product extends React.Component {
 
@@ -23,7 +22,13 @@ class Product extends React.Component {
 	select = (eo) => {
 		// this.props.cbSelectedItem(this.props.id);
 		(!this.props.isDisabledBtns) && (
-			this.props.cbSelectedItem({ selectedId: this.props.id, selectedName: this.props.productName, selectedPrice: this.props.price, selectedRest: this.props.rest, selectedUrl: this.props.photoUrl }))
+			this.props.cbSelectedItem({
+				selectedId: this.props.id,
+				selectedName: this.props.productName,
+				selectedPrice: this.props.price,
+				selectedRest: this.props.rest,
+				selectedUrl: this.props.photoUrl
+			}))
 	};
 
 	delete = (eo) => {
@@ -34,7 +39,14 @@ class Product extends React.Component {
 	edit = (eo) => {
 		// console.log(`Edit pushed ${this.props.id}`);
 		// this.props.cbEditItem(this.props.id);
-		this.props.cbEditItem({ editedId: this.props.id, editedName: this.props.productName, editedPrice: this.props.price, editedRest: this.props.rest, editedPhotoUrl: this.props.photoUrl });
+		this.props.cbEditItem({
+			editedId: this.props.id,
+			editedName: this.props.productName,
+			editedPrice: this.props.price,
+			editedRest: this.props.rest,
+			editedPhotoUrl: this.props.photoUrl,
+			isEdited: true
+		});
 	}
 
 	render() {

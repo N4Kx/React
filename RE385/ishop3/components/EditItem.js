@@ -16,7 +16,8 @@ class EditItem extends React.Component {
 		editedItemPrice: PropTypes.number,
 		editedItemRest: PropTypes.number,
 		editedItemPhotoUrl: PropTypes.string,
-		cbDisableBtns: PropTypes.func,
+		isEditedItem: PropTypes.bool,
+		cbCancel: PropTypes.func,
 		cbSaveItem: PropTypes.func,
 	}
 
@@ -34,15 +35,12 @@ class EditItem extends React.Component {
 
 	editField = (eo) => {
 		let newStateName = 'editedItem' + eo.target.dataset.n;
-		this.setState({ [newStateName]: eo.target.value }, this.props.cbDisableBtns(true));
+		this.setState({ [newStateName]: eo.target.value }, this.props.cbCancel(true));
 		this.validPass(eo.target.dataset.n, eo.target.value);
 	}
 
 	validPass = (name, value) => {
-		// let newStateName = 'editedItem' + name;
 		let isValidated = 'isValidated' + name;
-
-		// console.log(isValidated);
 
 		if (name == fieldName) {
 			let regExp = /[^a-z0-9]/i;
@@ -78,25 +76,16 @@ class EditItem extends React.Component {
 		}
 	}
 
-	// editNameField = (eo) => {
-	// 	this.setState({ editedItemName: eo.target.value }, this.props.cbDisableBtns(true))
-	// }
-
-	// editPriceField = (eo) => {
-	// 	this.setState({ editedItemPrice: eo.target.value }, this.props.cbDisableBtns(true))
-	// }
-
-	// editRestField = (eo) => {
-	// 	this.setState({ editedItemRest: eo.target.value }, this.props.cbDisableBtns(true))
-	// }
-
-	// editPhotoUrlField = (eo) => {
-	// 	this.setState({ editedItemPhotoUrl: eo.target.value }, this.props.cbDisableBtns(true))
-	// }
-
 	save = (eo) => {
-		this.props.cbSaveItem({ editedId: this.state.editedItemId, editedName: this.state.editedItemName, editedPrice: this.state.editedItemPrice, editedRest: this.state.editedItemRest, editedPhotoUrl: this.state.editedItemPhotoUrl })
-		this.props.cbDisableBtns(false);
+		this.props.cbSaveItem({
+			editedId: this.state.editedItemId,
+			editedName: this.state.editedItemName,
+			editedPrice: this.state.editedItemPrice,
+			editedRest: this.state.editedItemRest,
+			editedPhotoUrl: this.state.editedItemPhotoUrl
+		},
+			this.props.cbCancel(false));
+
 	}
 
 	cancel = (eo) => {
@@ -107,12 +96,13 @@ class EditItem extends React.Component {
 			editedItemRest: this.props.editedItemRest,
 			editedItemPhotoUrl: this.props.editedItemPhotoUrl,
 		},
-			this.props.cbDisableBtns(false));
+			this.props.cbCancel(false));
 	}
 
 	render() {
 		return (
 			<div className='EditIem'>
+				<h3>Edit existing product</h3>
 				<span className='editLabel'>ID:</span> <span>{this.state.editedItemId}</span><br />
 				<span className='editLabel'>Name:</span>  <input type='text' value={this.state.editedItemName} onChange={this.editField} data-n={fieldName}></input>{(!this.state.isValidatedName) && <span className='validateError'>Please, fill the field. The value must be a string of Latin letters and numbers</span>}
 				<br />
@@ -132,3 +122,20 @@ class EditItem extends React.Component {
 };
 
 export default EditItem;
+
+
+// editNameField = (eo) => {
+	// 	this.setState({ editedItemName: eo.target.value }, this.props.cbCancel(true))
+	// }
+
+	// editPriceField = (eo) => {
+	// 	this.setState({ editedItemPrice: eo.target.value }, this.props.cbCancel(true))
+	// }
+
+	// editRestField = (eo) => {
+	// 	this.setState({ editedItemRest: eo.target.value }, this.props.cbCancel(true))
+	// }
+
+	// editPhotoUrlField = (eo) => {
+	// 	this.setState({ editedItemPhotoUrl: eo.target.value }, this.props.cbCancel(true))
+	// }

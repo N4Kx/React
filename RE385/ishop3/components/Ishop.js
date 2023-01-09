@@ -33,8 +33,7 @@ class Ishop extends React.Component {
 	};
 
 	editItem = (code) => {
-		this.setState({ editedItemId: code.editedId, editedItemName: code.editedName, editedItemPrice: code.editedPrice, editedItemRest: code.editedRest, editedItemPhotoUrl: code.editedPhotoUrl });
-		// console.log(`Ishop + ${code}`);
+		this.setState({ editedItemId: code.editedId, editedItemName: code.editedName, editedItemPrice: code.editedPrice, editedItemRest: code.editedRest, editedItemPhotoUrl: code.editedPhotoUrl, isEdited: code.isEdited });
 	}
 
 	addItem = (code) => {
@@ -42,7 +41,6 @@ class Ishop extends React.Component {
 	}
 
 	saveItem = (code) => {
-		// console.log(this.state.product);
 		let newProduct = [];
 		for (let value of this.state.product) {
 			if (value.id == code.editedId) {
@@ -54,16 +52,21 @@ class Ishop extends React.Component {
 		this.setState({ product: newProduct });
 	}
 
-	disableBtns = (code) => {
-		// console.log('disable btns')
+	cancel = (code) => {
 		this.setState({ disableBtns: code });
 	}
 
 	render() {
 		let products = this.state.product.map(value =>
 			<Product
-				key={value.id} id={value.id} productName={value.productName} price={value.price}
-				rest={value.rest} isSelected={value.id == this.state.selectedItemId} isEdited={value.id == this.state.editedItemId} isDisabledBtns={this.state.disableBtns}
+				key={value.id}
+				id={value.id}
+				productName={value.productName}
+				price={value.price}
+				rest={value.rest}
+				isSelected={value.id == this.state.selectedItemId}
+				isEdited={value.id == this.state.editedItemId}
+				isDisabledBtns={this.state.disableBtns}
 				photoUrl={value.photoUrl}
 				cbSelectedItem={this.selectedItem} cbDeleteItem={this.deleteItem}
 				cbEditItem={this.editItem}
@@ -105,16 +108,17 @@ class Ishop extends React.Component {
 						editedItemPrice={this.state.editedItemPrice}
 						editedItemRest={this.state.editedItemRest}
 						editedItemPhotoUrl={this.state.editedItemPhotoUrl}
-						cbDisableBtns={this.disableBtns}
+						isEditedItem={this.state.selectedItemId == this.state.editedItemId}
+						cbCancel={this.cancel}
 						cbSaveItem={this.saveItem}
-					// editItemName={this.state.selectedItemId && this.state.selectedItemName}
 					/>
 					:
-					(this.state.selectedItemId) && <ProductCard
+					<ProductCard
 						selectedItemId={this.state.selectedItemId}
 						selectedItemName={this.state.selectedItemName}
 						selectedItemPrice={this.state.selectedItemPrice}
-					/>}
+					/>
+				}
 			</div>
 		);
 	}
