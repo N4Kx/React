@@ -114,7 +114,7 @@ class Ishop extends React.Component {
 						cbSaveItem={this.saveItem}
 					/>
 					:
-					(this.state.editedItemId) && <ProductCard
+					(this.state.selectedItemId) && <ProductCard
 						selectedItemId={this.state.selectedItemId}
 						selectedItemName={this.state.selectedItemName}
 						selectedItemPrice={this.state.selectedItemPrice}
