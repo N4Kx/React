@@ -103,6 +103,7 @@ class Ishop extends React.Component {
 
 				{(this.state.editedItemId == this.state.selectedItemId) ?
 					<EditItem
+						key={this.state.editedItemId}
 						editedItemId={this.state.editedItemId}
 						editedItemName={this.state.editedItemName}
 						editedItemPrice={this.state.editedItemPrice}
@@ -113,7 +114,7 @@ class Ishop extends React.Component {
 						cbSaveItem={this.saveItem}
 					/>
 					:
-					<ProductCard
+					(this.state.editedItemId) && <ProductCard
 						selectedItemId={this.state.selectedItemId}
 						selectedItemName={this.state.selectedItemName}
 						selectedItemPrice={this.state.selectedItemPrice}
