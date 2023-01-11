@@ -43,7 +43,7 @@ class Ishop extends React.Component {
 		let subArr = this.state.product.map(value => value.id);
 		let newId = subArr.reduce((a, b) => a > b ? a : b) + 1;
 
-		this.setState({ appState: 3, newProdBtnClckd: true, newProdId: newId })
+		this.setState({ appState: 3, newProdBtnClckd: true, newProdId: newId, disableBtns: true })
 	}
 
 	saveItem = (code) => {
@@ -63,7 +63,7 @@ class Ishop extends React.Component {
 	}
 
 	addItem = (code) => {
-		this.setState({ product: code.newProduct, appState: code.appState, newProdBtnClckd: false });
+		this.setState({ product: code.newProduct, appState: code.appState, newProdBtnClckd: false, disableBtns: code.lockBtns });
 	}
 
 	render() {
@@ -74,7 +74,7 @@ class Ishop extends React.Component {
 				productName={value.productName}
 				price={value.price}
 				rest={value.rest}
-				isSelected={value.id == this.state.selectedItemId}
+				isSelected={value.id == this.state.selectedItemId && this.state.appState != 3}
 				isEdited={value.id == this.state.editedItemId && this.state.appState == 2}
 				isDisabledBtns={this.state.disableBtns}
 				appState={this.state.appState}
@@ -133,9 +133,11 @@ class Ishop extends React.Component {
 
 						:
 						<AddItem
+							key={this.state.newProdId}
 							addedItemId={this.state.newProdId}
 							product={this.state.product}
 							cbAddItem={this.addItem}
+							cbCancel={this.cancel}
 						/>
 				}
 			</div>

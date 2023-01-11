@@ -52,7 +52,7 @@ class EditItem extends React.Component {
 		}
 		else if (name == photoUrl) {
 			let regExp = /[^a-z0-9.\-\/]/i;
-			if (!regExp.test(value)) {
+			if (!regExp.test(value) && value.length > 0) {
 				this.setState({ [isValidated]: true });
 			} else {
 				this.setState({ [isValidated]: false });
@@ -113,7 +113,7 @@ class EditItem extends React.Component {
 				<span className='editLabel'>Photo URL:</span> <input type='text' value={this.state.editedItemPhotoUrl} onChange={this.editField} data-n={photoUrl}></input>{(!this.state.isValidatedPhotoUrl) && <span className='validateError'>Please, fill the field. The value must be a string of Latin letters, numbers and symbols ".", "-", "\".</span>}
 				<br />
 				<input className='btn saveBtn' type='button' value='Save' onClick={this.save}
-					disabled={(this.state.isValidatedName && this.state.isValidatedPrice && this.state.isValidatedRest) ? false : true}
+					disabled={(this.state.isValidatedName && this.state.isValidatedPrice && this.state.isValidatedRest && this.state.isValidatedPhotoUrl) ? false : true}
 				></input>
 				<input className='btn cancelBtn' type='button' value='Cancel' onClick={this.cancel}></input>
 			</div>
