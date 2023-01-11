@@ -20,7 +20,7 @@ class Ishop extends React.Component {
 		selectedItemId: '',
 		disableBtns: false,
 		appState: 1,		// 1 - по умолчанию, 2 - редактирование продукта, 3 - добавление продукта
-
+		newProdBtnClckd: false,
 	};
 
 	selectedItem = (code) => {
@@ -40,7 +40,10 @@ class Ishop extends React.Component {
 	}
 
 	initAddItem = (code) => {
-		this.setState({ appState: 3 })
+		let subArr = this.state.product.map(value => value.id);
+		let newId = subArr.reduce((a, b) => a > b ? a : b) + 1;
+
+		this.setState({ appState: 3, newProdBtnClckd: true, newProdId: newId })
 	}
 
 	saveItem = (code) => {
@@ -56,7 +59,11 @@ class Ishop extends React.Component {
 	}
 
 	cancel = (code) => {
-		this.setState({ disableBtns: code.lockBtns, appState: code.appState, });
+		this.setState({ disableBtns: code.lockBtns, appState: code.appState, newProdBtnClckd: false });
+	}
+
+	addItem = (code) => {
+		this.setState({ product: code.newProduct, appState: code.appState, newProdBtnClckd: false });
 	}
 
 	render() {
@@ -99,7 +106,7 @@ class Ishop extends React.Component {
 					</tbody>
 				</table>
 				{
-					(this.state.appState == 1 || !this.state.isEdited) &&
+					(!this.state.newProdBtnClckd) &&
 					<input className='newBtn btn' type='button' value='New product' onClick={this.initAddItem}></input>
 				}
 				{
@@ -126,7 +133,9 @@ class Ishop extends React.Component {
 
 						:
 						<AddItem
-							addedItemId={this.state.product.length}
+							addedItemId={this.state.newProdId}
+							product={this.state.product}
+							cbAddItem={this.addItem}
 						/>
 				}
 			</div>
