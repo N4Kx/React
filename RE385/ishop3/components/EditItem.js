@@ -122,20 +122,3 @@ class EditItem extends React.Component {
 };
 
 export default EditItem;
-
-
-// editNameField = (eo) => {
-	// 	this.setState({ editedItemName: eo.target.value }, this.props.cbCancel(true))
-	// }
-
-	// editPriceField = (eo) => {
-	// 	this.setState({ editedItemPrice: eo.target.value }, this.props.cbCancel(true))
-	// }
-
-	// editRestField = (eo) => {
-	// 	this.setState({ editedItemRest: eo.target.value }, this.props.cbCancel(true))
-	// }
-
-	// editPhotoUrlField = (eo) => {
-	// 	this.setState({ editedItemPhotoUrl: eo.target.value }, this.props.cbCancel(true))
-	// }
