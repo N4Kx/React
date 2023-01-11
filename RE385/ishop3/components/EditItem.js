@@ -35,7 +35,7 @@ class EditItem extends React.Component {
 
 	editField = (eo) => {
 		let newStateName = 'editedItem' + eo.target.dataset.n;
-		this.setState({ [newStateName]: eo.target.value }, this.props.cbCancel(true));
+		this.setState({ [newStateName]: eo.target.value }, this.props.cbCancel({ lockBtns: true, appState: 2 }));
 		this.validPass(eo.target.dataset.n, eo.target.value);
 	}
 
@@ -84,7 +84,7 @@ class EditItem extends React.Component {
 			editedRest: this.state.editedItemRest,
 			editedPhotoUrl: this.state.editedItemPhotoUrl
 		},
-			this.props.cbCancel(false));
+			this.props.cbCancel({ lockBtns: false, appState: 1 }));
 
 	}
 
@@ -96,7 +96,7 @@ class EditItem extends React.Component {
 			editedItemRest: this.props.editedItemRest,
 			editedItemPhotoUrl: this.props.editedItemPhotoUrl,
 		},
-			this.props.cbCancel(false));
+			this.props.cbCancel({ lockBtns: false, appState: 1 }));
 	}
 
 	render() {

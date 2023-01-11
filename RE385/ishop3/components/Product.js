@@ -14,20 +14,22 @@ class Product extends React.Component {
 		isSelected: PropTypes.bool,
 		isEdited: PropTypes.bool,
 		isDisabledBtns: PropTypes.bool,
+		appState: PropTypes.number,
 		cbSelectedItem: PropTypes.func,
 		cbDeleteItem: PropTypes.func,
 		cbEditItem: PropTypes.func,
 	};
 
 	select = (eo) => {
-		// this.props.cbSelectedItem(this.props.id);
 		(!this.props.isDisabledBtns) && (
 			this.props.cbSelectedItem({
 				selectedId: this.props.id,
 				selectedName: this.props.productName,
 				selectedPrice: this.props.price,
 				selectedRest: this.props.rest,
-				selectedUrl: this.props.photoUrl
+				selectedUrl: this.props.photoUrl,
+				appState: 2,
+
 			}))
 	};
 
@@ -37,15 +39,14 @@ class Product extends React.Component {
 	};
 
 	edit = (eo) => {
-		// console.log(`Edit pushed ${this.props.id}`);
-		// this.props.cbEditItem(this.props.id);
 		this.props.cbEditItem({
 			editedId: this.props.id,
 			editedName: this.props.productName,
 			editedPrice: this.props.price,
 			editedRest: this.props.rest,
 			editedPhotoUrl: this.props.photoUrl,
-			isEdited: true
+			isEdited: true,
+
 		});
 	}
 

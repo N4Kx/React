@@ -6,6 +6,7 @@ import './Ishop.css';
 import Product from './Product';
 import ProductCard from './ProductCard';
 import EditItem from './EditItem';
+import AddItem from './AddItem';
 
 class Ishop extends React.Component {
 
@@ -18,10 +19,12 @@ class Ishop extends React.Component {
 		product: this.props.product,
 		selectedItemId: '',
 		disableBtns: false,
+		appState: 1,		// 1 - по умолчанию, 2 - редактирование продукта, 3 - добавление продукта
+
 	};
 
 	selectedItem = (code) => {
-		this.setState({ selectedItemId: code.selectedId, selectedItemName: code.selectedName, selectedItemPrice: code.selectedPrice });
+		this.setState({ selectedItemId: code.selectedId, selectedItemName: code.selectedName, selectedItemPrice: code.selectedPrice, appState: code.appState });
 	};
 
 
@@ -33,11 +36,11 @@ class Ishop extends React.Component {
 	};
 
 	editItem = (code) => {
-		this.setState({ editedItemId: code.editedId, editedItemName: code.editedName, editedItemPrice: code.editedPrice, editedItemRest: code.editedRest, editedItemPhotoUrl: code.editedPhotoUrl, isEdited: code.isEdited });
+		this.setState({ editedItemId: code.editedId, editedItemName: code.editedName, editedItemPrice: code.editedPrice, editedItemRest: code.editedRest, editedItemPhotoUrl: code.editedPhotoUrl, isEdited: code.isEdited, appState: code.appState });
 	}
 
-	addItem = (code) => {
-		console.log('ADD ITEM!!!');
+	initAddItem = (code) => {
+		this.setState({ appState: 3 })
 	}
 
 	saveItem = (code) => {
@@ -53,7 +56,7 @@ class Ishop extends React.Component {
 	}
 
 	cancel = (code) => {
-		this.setState({ disableBtns: code });
+		this.setState({ disableBtns: code.lockBtns, appState: code.appState, });
 	}
 
 	render() {
@@ -65,8 +68,9 @@ class Ishop extends React.Component {
 				price={value.price}
 				rest={value.rest}
 				isSelected={value.id == this.state.selectedItemId}
-				isEdited={value.id == this.state.editedItemId}
+				isEdited={value.id == this.state.editedItemId && this.state.appState == 2}
 				isDisabledBtns={this.state.disableBtns}
+				appState={this.state.appState}
 				photoUrl={value.photoUrl}
 				cbSelectedItem={this.selectedItem} cbDeleteItem={this.deleteItem}
 				cbEditItem={this.editItem}
@@ -94,14 +98,55 @@ class Ishop extends React.Component {
 						{products}
 					</tbody>
 				</table>
-				{/* {
-					(this.state.editedId == this.state.selectedItemId) ?
-						null
-						:
-						<input className='newBtn btn' type='button' value='New product' onClick={this.addItem}></input>
-				} */}
+				{
+					(this.state.appState == 1 || !this.state.isEdited) &&
+					<input className='newBtn btn' type='button' value='New product' onClick={this.initAddItem}></input>
+				}
+				{
+					(this.state.appState != 3)
+						?
+						(this.state.editedItemId == this.state.selectedItemId && this.state.appState == 2) ?
+							(this.state.appState == 2) && <EditItem
+								key={this.state.editedItemId}
+								editedItemId={this.state.editedItemId}
+								editedItemName={this.state.editedItemName}
+								editedItemPrice={this.state.editedItemPrice}
+								editedItemRest={this.state.editedItemRest}
+								editedItemPhotoUrl={this.state.editedItemPhotoUrl}
+								isEditedItem={this.state.selectedItemId == this.state.editedItemId}
+								cbCancel={this.cancel}
+								cbSaveItem={this.saveItem}
+							/>
+							:
+							(this.state.selectedItemId) && <ProductCard
+								selectedItemId={this.state.selectedItemId}
+								selectedItemName={this.state.selectedItemName}
+								selectedItemPrice={this.state.selectedItemPrice}
+							/>
 
-				{(this.state.editedItemId == this.state.selectedItemId) ?
+						:
+						<AddItem
+							addedItemId={this.state.product.length}
+						/>
+				}
+			</div>
+		);
+	}
+};
+
+export default Ishop;
+
+
+
+/*
+	{
+					(this.state.appState == 1 || this.state.appState != 3) &&
+					<input className='newBtn btn' type='button' value='New product' onClick={this.addItem}></input>
+				}
+
+
+
+{(this.state.editedItemId == this.state.selectedItemId) ?
 					<EditItem
 						key={this.state.editedItemId}
 						editedItemId={this.state.editedItemId}
@@ -120,9 +165,4 @@ class Ishop extends React.Component {
 						selectedItemPrice={this.state.selectedItemPrice}
 					/>
 				}
-			</div>
-		);
-	}
-};
-
-export default Ishop;
+*/
