@@ -11,9 +11,6 @@ class BR2JSX extends React.Component {
 		text: PropTypes.string,
 	}
 
-
-
-
 	render() {
 		let text = this.props.text;
 
@@ -21,11 +18,11 @@ class BR2JSX extends React.Component {
 		const regExp1 = /<br\/>/g;
 		const regExp3 = /<br \/>/g;
 
-		text = text.replace(regExp1, ' <br/> ');
-		text = text.replace(regExp2, ' <br/> ');
-		text = text.replace(regExp3, ' <br/> ');
+		text = text.replace(regExp1, '_<br/>_');
+		text = text.replace(regExp2, '_<br/>_');
+		text = text.replace(regExp3, '_<br/>_');
 
-		text = text.split(' ');
+		text = text.split('_');
 
 		text = text.map(value => {
 			return (value == '<br/>') ? <br /> : value;
