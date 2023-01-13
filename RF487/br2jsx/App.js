@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 
 import BR2JSX from './components/BR2JSX';
 
-let colors = ['red', 'orange', 'yellow', 'green', '#00BFFF', 'blue', 'purple'];
+let text = "первый<br>второй<br/>третий<br />последний";
 
 ReactDOM.render(
-	<RainbowFrame colors={colors}>
-		Hello!
-	</RainbowFrame>
+	<BR2JSX text={text} />
 	, document.querySelector('#container')
 );
