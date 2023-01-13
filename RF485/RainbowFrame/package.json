@@ -1,7 +1,7 @@
 {
-	"name": "iShop3",
+	"name": "RainbowFrame",
 	"version": "1.0.0",
-	"description": "магазинчик",
+	"description": "Радужные блоки",
 	"main": "App.js",
 	"scripts": {
 		"build": ".\\node_modules\\.bin\\webpack",
