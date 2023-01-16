@@ -13,23 +13,20 @@ class BR2JSX extends React.Component {
 
 	render() {
 		let text = this.props.text;
+		let newText = [];
 
-		const regExp2 = /<br>/g;
-		const regExp1 = /<br\/>/g;
-		const regExp3 = /<br \/>/g;
+		const regExp = /<br *\/?>/;
 
-		text = text.replace(regExp1, '_<br/>_');
-		text = text.replace(regExp2, '_<br/>_');
-		text = text.replace(regExp3, '_<br/>_');
+		text = text.split(regExp);
 
-		text = text.split('_');
-
-		text = text.map(value => {
-			return (value == '<br/>') ? <br /> : value;
-		})
+		for (let i = 0; i < text.length; i++) {
+			if (i != 0)
+				newText.push(<br />);
+			newText.push(text[i]);
+		}
 
 		return (
-			<div className='br2jsx'>{text}</div>
+			<div className='br2jsx'> {newText}</div>
 		)
 	}
 }
