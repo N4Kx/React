@@ -19,19 +19,18 @@ class BR2JSX extends React.Component {
 
 		text = text.split(regExp);
 
-		// for (let i = 0; i < text.length; i++) {
-		// 	if (i != 0)
-		// 		newText.push(<br />);
-		// 	newText.push(text[i]);
-		// }
+		for (let i = 0; i < text.length; i++) {
+			if (i != 0)
+				newText.push(<br key={i} />);
+			newText.push(text[i]);
+		}
 
-		text.reduce((prev, curr) => {
-			if (prev != false)
-				newText.push(<br />);
-			newText.push(curr);
-			return newText
-		}, "");
-
+		// text.reduce((prev, curr) => {
+		// 	if (prev != false)
+		// 		newText.push(<br key={curr} />);
+		// 	newText.push(curr);
+		// 	return newText
+		// }, "");
 
 		return (
 			<div className='br2jsx' > {newText}</div>
